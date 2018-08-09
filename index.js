@@ -87,8 +87,13 @@ var metaScraper = function metaScraper(url) {
       // Add description
       var description = metaArray.filter(function (item) {
         return item.name && item.name === 'description';
-      })[0].content || false;
-      returnData.description = returnData.og && returnData.og.description ? returnData.og.description : returnData.twitter && returnData.twitter.description ? returnData.twitter.description : description;
+      });      
+      
+      if (description.length === 0) {
+    		description = false;   
+      } else {
+	       description = description[0].content;
+      }
 
       // Add image
       returnData.image = returnData.og && returnData.og.image ? returnData.og.image : returnData.twitter && returnData.twitter.image ? returnData.twitter.image : false;
